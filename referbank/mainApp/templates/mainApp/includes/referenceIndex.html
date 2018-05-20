@@ -1,0 +1,144 @@
+{% extends "mainApp/wrapper.html" %}
+
+{% block content %}
+<div class="container-fluid main-container">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-3 col-lg-4 box-add-upd">
+      <!--Add panel-->
+      <div class="container-form-add">
+          <h4 class="caption-box" id="captionBank-add">Добавить банк</h4>
+          <div class="container">
+            <div>
+              <form id="form-add-bank" action="{% url 'addbank' %}" method="post" class="text-left">{% csrf_token %}
+                <div class="form-group">
+                  <label for="field-bik-add">БИК : </label>
+                  <input name="{{ form.bik.name }}" class="form-control" id="field-bik-add" >
+                </div>
+                <div class="form-group">
+                  <label for="field-name-add">Наименование : </label>
+                  <input name="{{ form.name.name }}" class="form-control" id="field-name-add">
+                </div>
+                <div class="form-group">
+                  <label for="field-cornumber-add">Кор. счет : </label>
+                  <input name="{{ form.cornumber.name }}" class="form-control" id="field-cornumber-add">
+                </div>
+                <div class="form-group">
+                  <label for="field-adress-add">Адрес : </label>
+                  <input name="{{ form.adress.name }}" class="form-control" id="field-adress-add">
+                </div>
+                <div class="panel-btn-add">
+                      <button id="btn-submit-add-bank" class="b-el btn btn-sm btn-primary" type="submit">Сохранить</button>
+                      <a href="#" id="btn-cancel-add-bank" class="b-el btn btn-sm btn-primary" >Отмена</a>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+
+      <!--Update panel-->
+      <div class="container-form-upd">
+          <h4 class="caption-box">Редактировать банк</h4>
+          <div class="container">
+            <div>
+              <form id="form-upd-bank" action="{% url 'updbank' %}" method="post" class="text-left">{% csrf_token %}
+                <div class="form-group">
+                  <label for="field-bik-upd">БИК : </label>
+                  <input  class="form-control" id="field-bik-upd" >
+                </div>
+                <div class="form-group">
+                  <label for="field-name-upd">Наименование : </label>
+                  <input class="form-control" id="field-name-upd">
+                </div>
+                <div class="form-group">
+                  <label for="field-cornumber-upd">Кор. счет : </label>
+                  <input  class="form-control" id="field-cornumber-upd">
+                </div>
+                <div class="form-group">
+                  <label for="field-adress-upd">Адрес : </label>
+                  <input class="form-control" id="field-adress-upd">
+                </div>
+                <div class="panel-btn-add">
+                      <button id="btn-submit-upd-bank" class="b-el btn btn-sm btn-primary" type="submit">Сохранить</button>
+                      <a href="#" id="btn-cancel-upd-bank" class="b-el btn btn-sm btn-primary">Отмена</a>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!--Register-->
+    <div class="col-xs-12 col-md-5 col-lg-3">
+      <div class="container container-reestr box-reestr">
+        <h4 class="caption-box">Справочник банков</h4>
+        <div class="container-table-banks mygrid-wrapper-div">
+          <br>
+          <table class="table table-hover table-sm table-bordered" id="table-banks" >
+            <thead disabled >
+              <tr>
+                <th scope="col">Наименование</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for bank in banks %}
+                <tr class="rowTable" onclick="viewInfoBank()" >
+                  <td scope="col"  name = "idBank" style="display: none">{{bank.id}}</td>
+                  <td scope="col"  name = "bikBank" style="display: none">{{bank.bik}}</td>
+                  <td scope="col" name = "nameBank" >{{bank.name}}</td>
+                  <td scope="col" name = "cornumberBank" style="display: none">{{bank.cornumber}}</td>
+                  <td scope="col" name = "adressBank" style="display: none">{{bank.adress}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="container btn-gr">
+        <button id="btn-view" class="b-el btn btn-sm btn-primary button-view-filters" >Просмотр</button>
+        <button id="btn-add" class="b-el btn btn-sm btn-primary button-add">Добавить</button>
+        <button id="btn-upd" class="b-el btn btn-sm btn-primary button-upd">Редактировать</button>
+        <button id="btn-del" class="b-el btn btn-sm btn-primary button-del" action="{% url 'deletebank' %}">Удалить</button>{% csrf_token %}
+
+      </div>
+        <button id="btn-search" class="b-el btn btn-sm btn-primary button-search-filters" >Фильтры</button>
+      <div class="panel filters-search-pnl">
+          <h4 class="caption-box">Фильтры</h4>
+          <div class="filter-search filter-bik">
+            <p >БИК : <input class="form-control" id="filter-bik-search" ></p>
+          </div>
+          <div class="filter-search filter-name">
+            <p >Наименование : <input class="form-control" id="filter-name-search" ></p>
+          </div>
+          <button id="btn-submit-search-bank" class="b-el btn btn-sm btn-primary" type="submit" action="{% url 'searchbank' %}">Найти</button>{% csrf_token %}
+      </div>
+    </div>
+    <!--View block-->
+    <div class="col-xs-12 col-md-3 col-lg-3 box-view">
+      <div class="container">
+        <h4 class="caption-box">Информация о банке</h4>
+        <div class="container">
+          <div>
+              <div class="box-bik-view ">
+                <label >БИК : </label>
+                <p id="field-bik-view" class="f-v"></p>
+              </div>
+              <div class="box-name-view">
+                <label for="field-name-view">Наименование : </label>
+                <p id="field-name-view" class="f-v"></p>
+              </div>
+              <div class="box-cornumber-view">
+                <label for="field-cornumber-view">Кор. счет : </label>
+                <p id="field-cornumber-view" class="f-v"></p>
+              </div>
+              <div class="box-adress-view">
+                <label for="field-adress-view">Адрес : </label>
+                <p id="field-adress-view" class="f-v"></p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

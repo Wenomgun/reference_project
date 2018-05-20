@@ -1,0 +1,90 @@
+.box-view {
+  background: #F5F5F5;
+  border: 1px solid black;
+  padding: 20px;
+  margin-left: 10px;
+  border-radius: 50px 50px 50px 50px;
+}
+
+.button-search-filters {
+    width: 100%;
+}
+
+.btn-gr{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.b-el{
+    border-radius: 10px 10px 10px 10px;
+}
+
+.f-v {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.mygrid-wrapper-div {
+    overflow: scroll;
+    height: 300px;
+}
+
+.main-container{
+    align: center;
+}
+
+.filters-search-pnl {
+   display: inline-block;
+   border: 1px solid black;
+   padding: 20px;
+   background: #F5F5F5;
+   margin-top: 20px;
+   border-radius: 50px 50px 50px 50px;
+}
+.container-buttons{
+    display: block;
+    padding-top: 20px;
+    display: inline-block;
+
+}
+.caption-box{
+  background: #C1C1C1;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+  text-align: center;
+}
+.box-reestr {
+  background: #F5F5F5;
+  border: 1px solid black;
+  height: 420px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 50px 50px 50px 50px;
+
+}
+
+.box-add-upd {
+  background: #F5F5F5;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 50px 50px 50px 50px;
+}
+
+.selectedRow {
+  background: #C4FFEB;
+}
+
+.showEl {
+  display: block;
+}
+
+.unShowEl {
+  display: none;
+}
+
+.disabledEl {
+    background-color: black;
+    border: 2px solid #666;
+}
+
+

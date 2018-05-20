@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/mainApp.css' %}" type="text/css">
+  <title>Reference Bank</title>
+</head>
+<body>
+  <div class="jumbotron">
+    <div class="head-menu">
+      <h3>Reference Russian Banks</h3>
+    </div>
+  </div>
+  <div class="main-container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/mainApp.js' %}"></script>
+</body>
+
+</html>
