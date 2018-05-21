@@ -16,7 +16,7 @@
     margin-bottom: 20px;
 }
 .b-el{
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 50px 50px 50px 50px;
 }
 
 .f-v {
@@ -25,21 +25,13 @@
 }
 .mygrid-wrapper-div {
     overflow: scroll;
-    height: 300px;
+    height: 400px;
 }
 
 .main-container{
     align: center;
 }
 
-.filters-search-pnl {
-   display: inline-block;
-   border: 1px solid black;
-   padding: 20px;
-   background: #F5F5F5;
-   margin-top: 20px;
-   border-radius: 50px 50px 50px 50px;
-}
 .container-buttons{
     display: block;
     padding-top: 20px;
@@ -50,13 +42,13 @@
   background: #C1C1C1;
   border-bottom: 1px solid black;
   border-right: 1px solid black;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 50px 50px 50px 50px;
   text-align: center;
 }
 .box-reestr {
   background: #F5F5F5;
   border: 1px solid black;
-  height: 420px;
+  height: 720px;
   width: 100%;
   padding: 20px;
   border-radius: 50px 50px 50px 50px;
@@ -85,6 +77,52 @@
 .disabledEl {
     background-color: black;
     border: 2px solid #666;
+}
+
+.box-countRow p{
+    align: right;
+    display: inline;
+}
+
+.box-countRow{
+    text-align: center;
+    margin: 10px;
+}
+/**/
+
+#filter-name, #filter-bik {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  border-radius: 50px 50px 50px 50px;
+}
+
+.form-control{
+    border-radius: 50px 50px 50px 50px;
+}
+
+#table-banks {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#table-banks th, #table-banks td {
+  text-align: left;
+  padding: 12px;
+}
+
+#table-banks tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#table-banks tr.header, #table-banks tr:hover {
+  background-color: #f1f1f1;
 }
 
 

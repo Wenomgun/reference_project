@@ -8,5 +8,4 @@ urlpatterns = [
     path('addbank', views.addbank, name='addbank'),
     path('updbank', views.updbank, name='updbank'),
     path('deletebank', views.deletebank, name='deletebank'),
-    path('searchbank', views.searchbank, name='searchbank'),
 ]

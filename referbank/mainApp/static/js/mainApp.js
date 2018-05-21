@@ -1,4 +1,9 @@
 $(document).ready(function(){
+    $(function(){
+      $("#field-bik-add").mask("999999999");
+      $("#field-bik-upd").mask("999999999");
+    });
+
     $('.container-form-add').addClass('unShowEl');
     $('.container-form-upd').addClass('unShowEl');
     $('.box-add-upd').addClass('unShowEl');
@@ -99,6 +104,7 @@ $(document).ready(function(){
         }
     });
     viewInfoBank();
+    onFilter();
 
 
 });
@@ -179,7 +185,7 @@ $(document).ready(function () {
     var updSubmit = $('#btn-cancel-upd-bank');
 
     form.on('submit', function(e) {
-        if(confirm("Изменить выбранную запись?")){
+
             e.preventDefault();
             var data = {};
             var csrf_token = $('#form-upd-bank [name="csrfmiddlewaretoken"]').val();
@@ -204,7 +210,7 @@ $(document).ready(function () {
                     console.log("error");
                 }
            });
-       }
+
     });
 });
 
@@ -235,39 +241,40 @@ $(document).ready(function () {
            });
         };
     });
-
 });
 
-//Search bank
-$(document).ready(function () {
-    var searchBtn = $('#btn-search');
-    var url = searchBtn.attr("action");
+function onFilter() {
+  var filterName, fName, filterBik, fBik ,table, tr, tdName, tdBik, i;
+  filterName = document.getElementById("filter-name");
+  fName = filterName.value.toUpperCase();
+  filterBik = document.getElementById("filter-bik");
+  fBik = filterBik.value.toUpperCase();
+  table = document.getElementById("table-banks");
+  tr = table.getElementsByTagName("tr");
+  var count = tr.length-1;
 
-    searchBtn.click( function(e) {
-
-        var data = {};
-        var csrf_token = $('.container-buttons [name="csrfmiddlewaretoken"]').val();
-        data["csrfmiddlewaretoken"] = csrf_token;
-        data["bikBankSearch"] = $('#filter-bik-search').val();
-        data["nameBankSearch"] = $('#filter-name-search').val();
-        console.log(data);
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            cache: false,
-            success: function(data){
-                console.log("succesful search");
-               // console.log(data);
-                //window.location.replace("/");
-            },
-            error : function(){
-                console.log("error search");
-            }
-       });
-
-    });
-});
+  for (i = 0; i < tr.length; i++) {
+    tdBik = tr[i].getElementsByTagName("td")[1];
+    tdName = tr[i].getElementsByTagName("td")[2];
+    if (tdBik) {
+      if (tdBik.innerHTML.toUpperCase().indexOf(fBik) > -1) {
+        tr[i].style.display = "";
+        if (tdName) {
+          if (tdName.innerHTML.toUpperCase().indexOf(fName) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+            --count;
+          }
+        }
+      } else {
+        tr[i].style.display = "none";
+        --count;
+      }
+    }
+  }
+  document.getElementById("countRow").innerHTML = count;
+}
 
 
 

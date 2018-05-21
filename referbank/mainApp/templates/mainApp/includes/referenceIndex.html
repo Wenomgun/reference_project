@@ -17,15 +17,15 @@
                 </div>
                 <div class="form-group">
                   <label for="field-name-add">Наименование : </label>
-                  <input name="{{ form.name.name }}" class="form-control" id="field-name-add">
+                  <input name="{{ form.name.name }}" class="form-control" id="field-name-add" maxlength="50">
                 </div>
                 <div class="form-group">
                   <label for="field-cornumber-add">Кор. счет : </label>
-                  <input name="{{ form.cornumber.name }}" class="form-control" id="field-cornumber-add">
+                  <input name="{{ form.cornumber.name }}" class="form-control" id="field-cornumber-add" maxlength="50">
                 </div>
                 <div class="form-group">
                   <label for="field-adress-add">Адрес : </label>
-                  <input name="{{ form.adress.name }}" class="form-control" id="field-adress-add">
+                  <input name="{{ form.adress.name }}" class="form-control" id="field-adress-add" maxlength="150">
                 </div>
                 <div class="panel-btn-add">
                       <button id="btn-submit-add-bank" class="b-el btn btn-sm btn-primary" type="submit">Сохранить</button>
@@ -48,15 +48,15 @@
                 </div>
                 <div class="form-group">
                   <label for="field-name-upd">Наименование : </label>
-                  <input class="form-control" id="field-name-upd">
+                  <input class="form-control" id="field-name-upd" maxlength="50">
                 </div>
                 <div class="form-group">
                   <label for="field-cornumber-upd">Кор. счет : </label>
-                  <input  class="form-control" id="field-cornumber-upd">
+                  <input  class="form-control" id="field-cornumber-upd" maxlength="50">
                 </div>
                 <div class="form-group">
                   <label for="field-adress-upd">Адрес : </label>
-                  <input class="form-control" id="field-adress-upd">
+                  <input class="form-control" id="field-adress-upd" maxlength="150">
                 </div>
                 <div class="panel-btn-add">
                       <button id="btn-submit-upd-bank" class="b-el btn btn-sm btn-primary" type="submit">Сохранить</button>
@@ -71,16 +71,27 @@
     <!--Register-->
     <div class="col-xs-12 col-md-5 col-lg-3">
       <div class="container container-reestr box-reestr">
-        <h4 class="caption-box">Справочник банков</h4>
+        <h4 class="caption-box">Реестр</h4>
+        <div class="filters-search panel">
+          <div class="panel-heading">Фильтры</div>
+          <div class="filter-search filter-bik">
+            <p> БИК: <input type="text" id="filter-bik" onkeyup="onFilter()" placeholder="Search for bik.."></p>
+          </div>
+          <div class="filter-search filter-name">
+            <p> Наименование: <input type="text" id="filter-name" onkeyup="onFilter()" placeholder="Search for name.."></p>
+          </div>
+        </div>
+
         <div class="container-table-banks mygrid-wrapper-div">
           <br>
+
           <table class="table table-hover table-sm table-bordered" id="table-banks" >
             <thead disabled >
-              <tr>
+              <tr class="header">
                 <th scope="col">Наименование</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="tbl-body">
               {% for bank in banks %}
                 <tr class="rowTable" onclick="viewInfoBank()" >
                   <td scope="col"  name = "idBank" style="display: none">{{bank.id}}</td>
@@ -92,7 +103,9 @@
               {% endfor %}
             </tbody>
           </table>
+
         </div>
+        <div class="box-countRow"><strong>Всего записей: </strong><p id="countRow"></p></div>
       </div>
       <div class="container btn-gr">
         <button id="btn-view" class="b-el btn btn-sm btn-primary button-view-filters" >Просмотр</button>
@@ -100,17 +113,6 @@
         <button id="btn-upd" class="b-el btn btn-sm btn-primary button-upd">Редактировать</button>
         <button id="btn-del" class="b-el btn btn-sm btn-primary button-del" action="{% url 'deletebank' %}">Удалить</button>{% csrf_token %}
 
-      </div>
-        <button id="btn-search" class="b-el btn btn-sm btn-primary button-search-filters" >Фильтры</button>
-      <div class="panel filters-search-pnl">
-          <h4 class="caption-box">Фильтры</h4>
-          <div class="filter-search filter-bik">
-            <p >БИК : <input class="form-control" id="filter-bik-search" ></p>
-          </div>
-          <div class="filter-search filter-name">
-            <p >Наименование : <input class="form-control" id="filter-name-search" ></p>
-          </div>
-          <button id="btn-submit-search-bank" class="b-el btn btn-sm btn-primary" type="submit" action="{% url 'searchbank' %}">Найти</button>{% csrf_token %}
       </div>
     </div>
     <!--View block-->

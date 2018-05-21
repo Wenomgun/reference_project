@@ -8,9 +8,8 @@ from .forms import BankForm
 
 def index(request):
     print("++++++LOAD+++++")
-    banks = Banks.objects.order_by('name')
+    banks = Banks.objects.all()
     context = {'banks': banks}
-
     return render(request, 'mainApp/includes/referenceIndex.html', context)
 
 
@@ -37,7 +36,7 @@ def deletebank(request):
     data = request.POST
     idCurBank = data.get("idBank")
     nameCurBank = data.get("nameBank")
-    print(idCurBank + " " + nameCurBank + "idCurBank, nameCurBank")
+
     targetBank = Banks.objects.get(name=nameCurBank)
     targetBank.delete()
     return JsonResponse(d)
@@ -50,7 +49,6 @@ def updbank(request):
     data = request.POST
     idCurBank = data.get("idBank")
     nameCurBank = data.get("nameBank")
-    print(idCurBank +" " + nameCurBank + "idCurBank, nameCurBank")
 
     bik = form.data.get("bik")
     name = form.data.get("name")
@@ -65,25 +63,3 @@ def updbank(request):
     targetBank.save()
 
     return JsonResponse(d)
-
-def searchbank(request):
-    print("+++++++SEARCH++++++")
-    banks = Banks.objects.all()
-    d = dict()
-    data = request.POST
-    bikBankSearch = data.get("bikBankSearch")
-    nameBankSearch = data.get("nameBankSearch")
-    if bikBankSearch!="" and nameBankSearch!="":
-        banks = Banks.objects.filter(name=nameBankSearch, bik=bikBankSearch)
-    if bikBankSearch!="":
-        banks = Banks.objects.filter(bik=bikBankSearch)
-    if nameBankSearch!="":
-        banks = Banks.objects.filter(name=nameBankSearch)
-    print(banks)
-
-    context = {'banks': banks}
-    print("CONTEXT")
-    print(banks)
-
-    #return render_to_response("mainApp/includes/referenceIndex.html", context)
-    return JsonResponse(data)
